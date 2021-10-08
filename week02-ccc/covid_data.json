@@ -1,0 +1,124 @@
+{
+  "data": [
+    {
+      "month": "January",
+      "year": "2020",
+      "new_cases": 28123,
+      "people_vaccinated": 0
+    },
+    {
+      "month": "February",
+      "year": "2020",
+      "new_cases": 228960,
+      "people_vaccinated": 0
+    },
+    {
+      "month": "March",
+      "year": "2020",
+      "new_cases": 2767109,
+      "people_vaccinated": 0
+    },
+    {
+      "month": "April",
+      "year": "2020",
+      "new_cases": 7807999,
+      "people_vaccinated": 0
+    },
+    {
+      "month": "May",
+      "year": "2020",
+      "new_cases": 8892968,
+      "people_vaccinated": 0
+    },
+    {
+      "month": "June",
+      "year": "2020",
+      "new_cases": 12926613,
+      "people_vaccinated": 0
+    },
+    {
+      "month": "July",
+      "year": "2020",
+      "new_cases": 21609747,
+      "people_vaccinated": 0
+    },
+    {
+      "month": "August",
+      "year": "2020",
+      "new_cases": 24184726,
+      "people_vaccinated": 0
+    },
+    {
+      "month": "September",
+      "year": "2020",
+      "new_cases": 26511613,
+      "people_vaccinated": 0
+    },
+    {
+      "month": "October",
+      "year": "2020",
+      "new_cases": 39869004,
+      "people_vaccinated": 0
+    },
+    {
+      "month": "November",
+      "year": "2020",
+      "new_cases": 57059690,
+      "people_vaccinated": 0
+    },
+    {
+      "month": "December",
+      "year": "2020",
+      "new_cases": 62101141,
+      "people_vaccinated": 2794588
+    },
+    {
+      "month": "January",
+      "year": "2021",
+      "new_cases": 62419651,
+      "people_vaccinated": 25201143
+    },
+    {
+      "month": "February",
+      "year": "2021",
+      "new_cases": 36299311,
+      "people_vaccinated": 49772180
+    },
+    {
+      "month": "March",
+      "year": "2021",
+      "new_cases": 48461473,
+      "people_vaccinated": 97593290
+    },
+    {
+      "month": "April",
+      "year": "2021",
+      "new_cases": 71501545,
+      "people_vaccinated": 144894586
+    },
+    {
+      "month": "May",
+      "year": "2021",
+      "new_cases": 60810951,
+      "people_vaccinated": 167733972
+    },
+    {
+      "month": "June",
+      "year": "2021",
+      "new_cases": 34960529,
+      "people_vaccinated": 180674739
+    },
+    {
+      "month": "July",
+      "year": "2021",
+      "new_cases": 48674594,
+      "people_vaccinated": 190982149
+    },
+    {
+      "month": "August",
+      "year": "2021",
+      "new_cases": 61705640,
+      "people_vaccinated": 205026070
+    }
+  ]
+}
