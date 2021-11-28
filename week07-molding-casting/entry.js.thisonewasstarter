@@ -1,0 +1,132 @@
+/**
+ * entry.js
+ *
+ * This is the first file loaded. It sets up the Renderer,
+ * Scene and Camera. It also starts the render loop and
+ * handles window resizes.
+ *
+ */
+
+import {
+  WebGLRenderer,
+  PerspectiveCamera,
+  Scene,
+  Vector3,
+  SphereGeometry,
+  MeshPhongMaterial,
+  Mesh,
+  Color,
+  ImageUtils,
+  BoxGeometry,
+  PlaneGeometry,
+  DoubleSide,
+  FlatShading,
+} from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { STLExporter } from "three/examples/jsm/exporters/STLExporter";
+import { SceneUtils } from "three/examples/jsm/utils/SceneUtils";
+import diffuse from "./data/diffuse.jpeg";
+import bump from "./data/bump.jpeg";
+import specular from "./data/specular.jpeg";
+import { saveAs } from "file-saver";
+
+// import SeedScene from './objects/Scene.js';
+
+const scene = new Scene();
+const camera = new PerspectiveCamera();
+const renderer = new WebGLRenderer({ antialias: true });
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.update();
+
+// const seedScene = new SeedScene();
+
+// scene.add(seedScene);
+
+// camera
+camera.position.set(6, 3, -10);
+camera.lookAt(new Vector3(0, 0, 0));
+
+// renderer
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setClearColor(0x7ec0ee, 1);
+
+////////////////////
+var pgeom = new PlaneGeometry(5, 5, 99, 99);
+var plane = SceneUtils.createMultiMaterialObject(pgeom, [
+  new MeshPhongMaterial({
+    color: 0x33ff33,
+    specular: 0x773300,
+    side: DoubleSide,
+    shading: FlatShading,
+    shininess: 3,
+  }),
+  //    new THREE.MeshStandardMaterial( { color: 0x33ff33, metalness: 0.3, side: THREE.DoubleSide, roughness: 1.0, shading: THREE.FlatShading} )
+  //,new THREE.MeshLambertMaterial( {
+  //    color:0xffffff, wireframe:true
+  //  })
+]);
+//var plane = new THREE.Mesh(pgeom, material);
+scene.add(plane);
+plane.rotation.x = -3.14 / 3.5;
+var peak = 60;
+var smoothing = 300;
+console.log(plane)
+console.log(plane.geometry.attributes.position.array)
+
+var vertices = plane.geometry.attributes.position.array;
+for (var i = 0; i <= vertices.length; i += 3) {
+    vertices[i+2] = peak * perlin.noise(
+        vertices[i]/smoothing, 
+        vertices[i+1]/smoothing)
+	}
+
+plane.geometry.attributes.position.needsUpdate = true;
+plane.geometry.computeVertexNormals();
+
+////////////////////
+var geometry = new SphereGeometry(0.5, 32, 32);
+var material = new MeshPhongMaterial();
+var earthMesh = new Mesh(geometry, material);
+earthMesh.position.set(1, 1, 1);
+scene.add(earthMesh);
+var geometry = new BoxGeometry(0.5, 0.5, 0.5);
+var material = new MeshPhongMaterial();
+var earthMesh = new Mesh(geometry, material);
+earthMesh.position.set(-1, -1, -1);
+scene.add(earthMesh);
+
+// render loop
+const onAnimationFrameHandler = (timeStamp) => {
+  renderer.render(scene, camera);
+  //   seedScene.update && seedScene.update(timeStamp);
+  window.requestAnimationFrame(onAnimationFrameHandler);
+  controls.update();
+};
+window.requestAnimationFrame(onAnimationFrameHandler);
+
+// resize
+const windowResizeHanlder = () => {
+  const { innerHeight, innerWidth } = window;
+  renderer.setSize(innerWidth, innerHeight);
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+};
+windowResizeHanlder();
+window.addEventListener("resize", windowResizeHanlder);
+
+// dom
+document.body.style.margin = 0;
+document.body.appendChild(renderer.domElement);
+
+var exporter = new STLExporter();
+var str = exporter.parse(scene); // Export the scene
+var blob = new Blob([str], { type: "text/plain" }); // Generate Blob from the string
+saveAs(blob, "file.stl"); //Save the Blob to file.stl
+
+// //Following code will help you to save the file without FileSaver.js
+// var link = document.createElement('a');
+// link.style.display = 'none';
+// document.body.appendChild(link);
+// link.href = URL.createObjectURL(blob);
+// link.download = 'Scene.stl';
+// link.click();
